@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ProgLayout</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_submenu">Submenu</string>
+    <string name="done">Done</string>
+    
+    <string name="action_play">Play</string>
+    <string name="action_left">Prev</string>
+    <string name="action_right">Next</string>
+        
+    <string name="action_list">Show Playlist</string>
+    <string name="action_gear">Show menu</string>
+    
+    
+    <string name="action_current_playlist">Playlist</string>
+    <string name="action_browse">Browse</string>
+    <string name="action_load">Load new track</string>
+    <string name="action_load_dir">Load new directory</string>
+    <string name="action_new_playlist">New list</string>
+    <string name="action_recent">Recent</string>
+    
+    <string name="action_more">More</string>
+    <string name="confirm">Confirm</string>
+    <string name="confirm_clear_track">Do you really want to clear the state of the current track?</string>
+    
+    <string name="action_delete">Delete</string>
+    <string name="action_refresh">Remove stubs</string>
+    <string name="action_settings">Settings</string>  
+    
+    <string name="current_playlist_title">Current playlist</string>
+    <string name="action_add_tracks">Add tracks</string>
+    
+    <string name="set_text">Text settings</string>
+    <string name="set_text_size">Size</string>    
+    <string name="set_text_scale">Scale</string>
+    <string name="set_text_color">Color</string>
+    <string name="set_text_align">Alignment</string>
+    
+    <string name="set_color">Color settings</string>
+    <string name="set_fst_color">First color</string>
+    <string name="set_snd_color">Second color</string>
+    <string name="set_bkg_color">Background color</string>
+    
+    <string name="set_layout">Layout settings</string>
+    <string name="set_margin">Margins</string>    
+    <string name="set_left_margin">Left</string>
+    <string name="set_right_margin">Right</string>
+    <string name="set_top_margin">Top</string>
+    <string name="set_bottom_margin">Bottom</string>    
+    
+    
+    <string name="select_all">Select all</string>
+    <string name="remove_all">Remove all</string>
+    <string name="select_playlist">Select playlist</string>
+    <string name="action_clear_track">Clear track</string>
+    
+    <string-array name="text_color">
+        <item>Green</item>
+        <item>Red</item>
+        <item>Blue</item>                	        
+    </string-array>
+    
+    <string name="recent_tracks">Recent tracks</string>	
+    <string name="recent_playlists">Recent playlists</string>
+    
+    <string name="no_ui_csd">No UI is defined.</string>
+</resources>

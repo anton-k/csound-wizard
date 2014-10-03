@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >   
+
+    
+    <ScrollView 
+         android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+	    
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >    
+	     
+	    
+      <TextView       
+        android:id="@+id/set_text"
+        android:text="@string/set_text"  
+        android:background="@drawable/back"        
+        style="@style/LightHeader" />        
+      
+ 			<LinearLayout
+ 			    android:id="@+id/set_text_container"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical"
+			    android:visibility="gone" >    		
+      	
+	      		    
+	      		    <TextView 
+	      		        android:id="@+id/set_text_size"
+	      		        android:text="@string/set_text_size" 
+	      		    	android:layout_width="match_parent"
+						android:layout_height="wrap_content"  />	   
+						
+	      		    <NumberPicker
+        				android:id="@+id/set_text_size_unit"
+        				android:layout_width="wrap_content"
+        				android:layout_height="wrap_content"
+        				android:layout_gravity="center_horizontal"
+        				android:orientation="vertical"
+        				android:width="100dip"        				
+        				android:visibility="gone"
+        				style="@style/SetInt" />       		    
+	      	 	    
+			      	<TextView 
+			      		android:id="@+id/set_text_scale"
+			      		android:text="@string/set_text_scale" 
+			      		android:layout_width="match_parent"
+						android:layout_height="wrap_content"  />
+			      	
+			      	<LinearLayout
+			      	    android:id="@+id/set_text_scale_unit"		 			    
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal"
+					    android:visibility="gone" >					    
+			      		
+			      		<TextView 
+			      		    android:id="@+id/set_text_scale_show_value"
+						    android:layout_width="wrap_content"
+						    android:layout_height="wrap_content"
+						    android:layout_weight="0" />
+			      		
+				      	<SeekBar
+				      		android:id="@+id/set_text_scale_unit_value"		      		     
+				      		android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							style="@style/SetMargin" />
+			      	
+			      	</LinearLayout>		    			      	
+      		    		
+		     		<TextView 
+		     		    android:id="@+id/set_text_color"
+		     		    android:text="@string/set_text_color" 
+		     		    android:layout_width="match_parent"		     		    
+						android:layout_height="wrap_content"  />  
+						
+		     		<Spinner
+		     		    android:id="@+id/set_text_color_unit"	     		    	 
+			      		android:layout_width="match_parent"
+						android:layout_height="wrap_content" 
+						style="@style/SetMargin"
+						android:visibility="gone" />
+		     		
+		     		<TextView 
+		     		    android:id="@+id/set_text_align"
+		     		    android:text="@string/set_text_align" 
+		     		    android:layout_width="match_parent"
+						android:layout_height="wrap_content"  />   
+							
+		     		<Spinner 
+		     		    android:id="@+id/set_text_align_unit"		     		        
+			      		android:layout_width="match_parent"
+						android:layout_height="wrap_content" 
+						style="@style/SetMargin"
+						android:visibility="gone" />	     	
+					
+	       </LinearLayout>
+			
+     				
+     <TextView    
+        android:id="@+id/set_color"  
+        android:text="@string/set_color"   
+        android:background="@drawable/back"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        style="@style/LightHeader" />
+     
+     		<LinearLayout
+ 			    android:id="@+id/set_color_container"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical"
+			    android:visibility="gone" >
+      
+     		     	   		    
+	           	<TextView 
+	           	    android:id="@+id/set_fst_color"
+	           	    android:text="@string/set_fst_color" 
+	           	    android:layout_width="match_parent"
+					android:layout_height="wrap_content"  />  
+					
+           	  		
+	      		<Spinner 
+	      		    android:id="@+id/set_fst_color_unit"	      		     
+	      		    android:layout_width="match_parent"
+					android:layout_height="wrap_content" 
+					style="@style/SetMargin"
+					android:visibility="gone" />      	
+					      		     			
+	         					
+	           	<TextView 
+	           	    android:id="@+id/set_snd_color"
+	           	    android:text="@string/set_snd_color" 
+	           	    android:layout_width="match_parent"
+					android:layout_height="wrap_content"  /> 
+					
+	           	<Spinner 
+	           	    android:id="@+id/set_snd_color_unit"
+	      			android:layout_width="match_parent"
+					android:layout_height="wrap_content" 
+					style="@style/SetMargin"
+					android:visibility="gone" />     		     
+					
+	       
+           		<TextView 
+           		    android:id="@+id/set_bkg_color"
+           		    android:text="@string/set_bkg_color" 
+           	    	android:layout_width="match_parent"
+					android:layout_height="wrap_content"  />  
+				
+           	 	<Spinner 
+           	 	    android:id="@+id/set_bkg_color_unit"          	 	     
+	      			android:layout_width="match_parent"
+					android:layout_height="wrap_content" 
+					style="@style/SetMargin"
+					android:visibility="gone" />    		
+	    
+				
+        </LinearLayout>
+     	
+      <TextView      
+        android:id="@+id/set_layout"
+        android:text="@string/set_layout"   
+        android:background="@drawable/back"
+        style="@style/LightHeader" />
+      
+      		<LinearLayout
+ 			    android:id="@+id/set_layout_container"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical"
+			    android:visibility="gone" > 
+			    
+      		 
+      		
+      			    <TextView 
+      			        android:id="@+id/set_layout_margin"
+      			        android:text="@string/set_margin"     		    
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"  /> 
+      			    
+      			    <LinearLayout
+		 			    android:id="@+id/set_layout_margin_unit"
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="vertical"
+					    android:visibility="gone" > 
+		      			 
+      			        
+      			    
+		     	    <LinearLayout 
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal" >
+					    
+			      		<TextView android:text="@string/set_left_margin"     		    
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:layout_gravity="center_vertical"  />     
+							
+			      					
+		      		    <NumberPicker
+	        				android:id="@+id/set_margin_left_unit"
+	        				android:layout_width="wrap_content"
+	        				android:layout_height="wrap_content"
+	        				android:layout_weight="1"
+	        				android:layout_gravity="center_horizontal"
+	        				android:orientation="vertical"
+	        				android:width="100dip" />
+		      	   </LinearLayout>		     
+						
+		      		
+	      		    	
+		     	    <LinearLayout 
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal" >
+		      				     
+			     		<TextView android:text="@string/set_right_margin"
+			     		     android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:layout_gravity="center_vertical"  />  
+							
+			     		 <NumberPicker
+	        				android:id="@+id/set_margin_right_unit"
+	        				android:layout_width="wrap_content"
+	        				android:layout_height="wrap_content"
+	        				android:layout_weight="1"
+	        				android:layout_gravity="center_horizontal"
+	        				android:orientation="vertical"
+	        				android:width="100dip" />
+			     	</LinearLayout>	
+		     				
+		     		 	
+		     	    <LinearLayout 
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal" >
+					    
+			     		<TextView android:text="@string/set_top_margin" 
+			     		    android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:layout_gravity="center_vertical"  /> 
+							
+			     		<NumberPicker
+	        				android:id="@+id/set_margin_top_unit"
+	        				android:layout_width="wrap_content"
+	        				android:layout_height="wrap_content"
+	        				android:layout_weight="1"
+	        				android:layout_gravity="center_horizontal"
+	        				android:orientation="vertical"	        			
+	        				android:width="100dip" />
+			     	</LinearLayout>	
+		     		
+		     	    <LinearLayout 
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal" > 		
+			     		<TextView android:text="@string/set_bottom_margin"
+			     		    android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:layout_gravity="center_vertical"  />	
+							
+			     		
+			     		 <NumberPicker
+	        				android:id="@+id/set_margin_bottom_unit"
+	        				android:layout_width="wrap_content"
+	        				android:layout_height="wrap_content"
+	        				android:layout_weight="1"
+	        				android:layout_gravity="center_horizontal"
+	        				android:orientation="vertical"	        				        				
+	        				android:width="100dip" />
+			     	</LinearLayout>				
+		     	
+						
+		     	</LinearLayout>
+				
+     		</LinearLayout>
+	</LinearLayout>		
+    
+	
+	</ScrollView>
+    
+      		    
+</LinearLayout>

@@ -1,0 +1,47 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+
+	<style name="AppBaseTheme" parent="android:Theme.Holo.Light"/>
+	<style name="AppTheme" parent="AppBaseTheme"/>
+	
+	<style name="WizardAppTheme" parent="AppTheme">
+	    <item name="android:textViewStyle">@style/MyTextView</item>	    
+	</style>
+	
+	<style name="MyTextView" parent="@android:style/Widget.TextView">
+	    <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+	    <item name="android:textSize">20sp</item>
+	    <item name="android:paddingLeft">15dp</item>
+	    <item name="android:paddingRight">15dp</item>
+	    <item name="android:paddingTop">8dp</item>
+	    <item name="android:paddingBottom">8dp</item>        
+	</style>
+	
+	<style name="Header" parent="@style/MyTextView">
+	    <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>	    
+	    <item name="android:textSize">22sp</item>
+	    <item name="android:paddingLeft">10dp</item>	   
+	    <item name="android:background">#B0C4DE</item>	           
+	</style>
+	
+	<style name="LightHeader" parent="@style/Header">
+	    <item name="android:background">@android:color/transparent</item>
+	</style>
+	    
+	<style name="SetInt">
+	    <item name="android:paddingTop">10dp</item>	    
+	    <item name="android:paddingBottom">10dp</item>
+	</style>    
+	
+	<style name="SetMargin">
+	    <item name="android:layout_margin">10dp</item>	    
+	    
+	</style>   
+	
+</resources>

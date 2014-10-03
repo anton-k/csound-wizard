@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent" >
+	
+    <!-- Footer aligned to bottom -->
+  <RelativeLayout
+	    android:id="@+id/footer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:background="#B0C4DE"
+		android:gravity="center" >
+		
+      
+       <LinearLayout          
+	     android:layout_width="match_parent" 
+	     android:layout_height="wrap_content"
+	     android:orientation="vertical" >
+        
+	    <Button
+	        android:id="@+id/action_load"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"        
+	        android:text="@string/action_load"
+	        android:textSize="20sp"
+	 		android:paddingLeft="5dp"
+	        android:paddingTop="6dp"
+	        android:paddingBottom="6dp"        
+	        android:drawableLeft="@drawable/load"
+	        android:background="@drawable/backwithborder" />    
+	        
+	    
+	    <Button
+	        android:id="@+id/action_load_dir"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"        
+	        android:text="@string/action_load_dir"
+	        android:textSize="20sp"
+	 		android:paddingLeft="5dp"
+	        android:paddingTop="6dp"
+	        android:paddingBottom="6dp"        
+	        android:drawableLeft="@drawable/list"
+	        android:background="@drawable/backwithborder" /> 
+        
+    </LinearLayout>		
+  </RelativeLayout>
+  
+      <ListView
+        	android:id="@+id/current_playlist"
+        	android:layout_width="match_parent"
+    		android:layout_height="match_parent" 
+    		android:layout_above="@id/footer" />  
+    
+	
+  
+</RelativeLayout>
+    
+

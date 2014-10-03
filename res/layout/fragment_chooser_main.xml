@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent" >
+	
+    <!-- Footer aligned to bottom -->
+  <RelativeLayout
+	    android:id="@+id/footer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:background="#B0C4DE"
+		android:gravity="center" >		
+    
+		<LinearLayout 
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal" >		    
+		      
+		   <Button
+		        android:id="@+id/action_ok"
+		        android:layout_width="match_parent"	        
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"        
+		        android:text="@android:string/ok"
+		        android:textSize="20sp"		   
+		        android:paddingLeft="5dp"
+		        android:paddingTop="6dp"
+		        android:paddingBottom="6dp"
+		        android:background="@drawable/backwithborder"
+		        android:onClick="onNewPlaylistClick" />		   
+		   
+		   <Button
+		        android:id="@+id/action_cancel"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"        
+		        android:text="@android:string/cancel"
+		        android:textSize="20sp"		        
+		        android:paddingLeft="5dp"
+		        android:paddingTop="6dp"
+		        android:paddingBottom="6dp"
+		        android:background="@drawable/backwithborder"
+		        android:onClick="onNewPlaylistClick" />
+		   
+		</LinearLayout>
+  </RelativeLayout>
+    
+  	 <LinearLayout
+       android:layout_width="fill_parent"
+        android:layout_height="wrap_content"       
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"	>
+		
+  	     <FrameLayout 
+  	         android:id="@+id/chooser_container"
+	         android:layout_width="match_parent"
+	    	 android:layout_height="wrap_content" >
+	         	         
+  	         
+  	     </FrameLayout>		      	    
+  	    
+	</LinearLayout>
+  
+</RelativeLayout>

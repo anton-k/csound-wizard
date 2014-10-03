@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_height="match_parent" 
+    android:layout_width="match_parent" >
+    
+  <LinearLayout 
+      android:layout_weight="1" 
+      android:layout_height="match_parent" 
+      android:layout_width="match_parent"
+      android:orientation="vertical" >
+      
+    <TextView       
+        android:text="@string/recent_tracks"      
+        style="@style/Header" />
+    
+    <ListView 
+        android:id="@+id/recent_tracks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />   
+      
+  </LinearLayout>
+  
+  <LinearLayout
+      android:layout_weight="1" 
+      android:layout_height="match_parent" 
+      android:layout_width="match_parent"
+      android:orientation="vertical" >
+    
+          
+    <TextView    
+       android:text="@string/recent_playlists"      
+       style="@style/Header" />
+    
+    <ListView 
+        android:id="@+id/recent_playlists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />    
+      
+  </LinearLayout> 
+  
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal" >
+    
+	    <com.example.proglayout.view.unit.CircleButton 
+	        android:id="@+id/btn1"
+	      	android:layout_width="wrap_content"
+	      	android:layout_height="wrap_content"
+	      	android:color="#FF0000" />   
+	
+	    <com.example.proglayout.view.unit.Dial 
+	        android:id="@+id/btn2"
+	      	android:layout_width="wrap_content"
+	      	android:layout_height="wrap_content" />   
+	    
+	    <com.example.proglayout.view.unit.ToggleButton 
+	        android:id="@+id/btn3"
+	      	android:layout_width="wrap_content"
+	      	android:layout_height="wrap_content"
+	      	android:color="#00FF00" /> 
+	      	
+	</LinearLayout>
+      	
+    <com.example.proglayout.view.unit.TapClickBoard 
+        android:id="@+id/pos1"
+      	android:layout_width="match_parent"
+      	android:layout_height="wrap_content" />
+       
+    
+</LinearLayout>

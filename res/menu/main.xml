@@ -1,0 +1,83 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:compat="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.proglayout.MainActivity" >
+    
+    <item android:id="@+id/action_play"
+          android:icon="@drawable/play"
+          android:showAsAction="always"
+          android:title="@string/action_play"/>   
+    
+    <item android:id="@+id/action_left"
+          android:icon="@drawable/left"
+          android:showAsAction="always"          
+          android:title="@string/action_left" />
+    
+    <item android:id="@+id/action_right"
+          android:icon="@drawable/right"
+          android:showAsAction="always"
+          android:title="@string/action_right" />
+    
+    <item android:id="@+id/action_submenu"
+          android:icon="@drawable/gear"
+          android:showAsAction="always"
+          android:title="@string/action_submenu">
+          
+         <menu>                 
+		    <item android:id="@+id/action_current_playlist"
+		          android:icon="@drawable/current"
+		          android:showAsAction="always"
+		          android:title="@string/action_current_playlist"/>
+		    
+		    <item android:id="@+id/action_browse"
+		          android:icon="@drawable/browse"
+		          android:showAsAction="always"
+		          android:title="@string/action_browse"/>
+		    
+		    <item android:id="@+id/action_recent"
+		          android:icon="@drawable/recent"
+		          android:showAsAction="always"
+		          android:title="@string/action_recent"/>
+		    		    		 
+		     <item android:id="@+id/action_clear_track"
+		          android:icon="@drawable/circle"
+		          android:showAsAction="always"
+		          android:title="@string/action_clear_track"/>		    
+		    
+		     <item android:id="@+id/action_more"
+		          android:icon="@drawable/list"
+		          android:showAsAction="always"
+		          android:title="@string/action_more">
+		          
+		          
+		         <menu>                 
+				    <item android:id="@+id/action_refresh"
+				          android:icon="@drawable/clockwise"
+				          android:showAsAction="always"
+				          android:title="@string/action_refresh"/>
+
+				    <item android:id="@+id/action_add_tracks"
+				          android:icon="@drawable/plus"
+				          android:showAsAction="always"
+				          android:title="@string/action_add_tracks"/>
+				    
+				    				    
+				     <item android:id="@+id/action_delete"
+				          android:icon="@drawable/trash"
+				          android:showAsAction="always"
+				          android:title="@string/action_delete"/>
+				     
+				     <item android:id="@+id/action_settings"
+				          android:icon="@drawable/gear"
+				          android:showAsAction="always"
+				          android:title="@string/action_settings"/>                   
+				     		                          
+		         </menu>   
+		          
+		     </item>
+                          
+         </menu>          
+    </item>   
+       
+</menu>
