@@ -12,22 +12,11 @@ import com.example.proglayout.csound.channel.Output;
 
 public class Player {
 	
-	public interface OutputCsoundValue extends Output, GetCsoundValue {}
-
 	private CsoundObj csoundObj = new CsoundObj();
 	private List<Output> outputs = new ArrayList<Output>();
 	
 	public Player() {}
-	
-	public void addValue(GetCsoundValue val) {
-		csoundObj.addValueCacheable(val.getCsoundValue());
-	}
-	
-	public void addValue(OutputCsoundValue val) {
-		outputs.add(val);
-		addValue(val);
-	}
-	
+		
 	public void play(Context ctx, String csdFile) {
 		csoundObj.startCsound(Utils.createTempFile(ctx, csdFile));
 		startOutputUpdates();
@@ -64,5 +53,12 @@ public class Player {
 			handler.postDelayed(this, 100);
 		}	
 	};
+	public CsoundObj getCsoundObj() {
+		return csoundObj;
+	}
+
+	public void addOutput(Output x) {
+		outputs.add(x);				
+	}
 	
 }

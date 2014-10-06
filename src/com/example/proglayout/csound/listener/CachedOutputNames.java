@@ -5,8 +5,7 @@ import java.util.List;
 
 import android.widget.TextView;
 
-import com.example.proglayout.App;
-import com.example.proglayout.csound.channel.DoubleOutput;
+import com.example.proglayout.Player;
 import com.example.proglayout.csound.channel.IntegerOutput;
 import com.example.proglayout.csound.channel.Output;
 
@@ -32,8 +31,8 @@ public class CachedOutputNames implements Output {
 		}				
 	}
 	
-	public void addToCsound(App app) {
-		app.getCsoundObj().addValueCacheable(mChn);
-		app.addOutput(this);
+	public void addToCsound(Player player) {
+		player.getCsoundObj().addValueCacheable(mChn);
+		player.addOutput(this);
 	}
 }

@@ -2,67 +2,27 @@ package com.example.proglayout;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Handler;
 import android.view.View;
 
-import com.csounds.CsoundObj;
-import com.example.proglayout.csound.channel.Output;
 import com.example.proglayout.model.CacheState;
 import com.example.proglayout.model.Model;
 import com.example.proglayout.model.TrackState;
 
 public class App extends Application {	
-	
-	private CsoundObj csoundObj = new CsoundObj();	
-	private Model model = null;
-	private Boolean isPlay = false;
+		
+	private Model model = null;	
 	private CacheState cache = new CacheState();
 	private boolean isWatchingCurrentPlaylist = false;	
-	private List<Output> outputs = new ArrayList<Output>();
-	
+		
 	private Settings settings = new Settings();;
 	
-	public CsoundObj getCsoundObj() {
-		return csoundObj;
-	}
-	
-	private void startCsound(File file) {
-		csoundObj.startCsound(file);
-						
-	}
-
-	private void stopCsound() {
-		csoundObj.stopCsound();		
-	}
-	
-	public void play(File file) {
-		if (isPlay) {			
-			stop();						
-		}
-				
-		startCsound(file);	
-		startOutputUpdates();
-		isPlay = true;
-	}
 		
-	public void stop() {
-		if (isPlay) {
-			stopOutputUpdates();
-			stopCsound();			
-			isPlay = false;
-		}		
-	}
-	
 	public Model getModel() {
 		return model;
 	}
@@ -146,40 +106,4 @@ public class App extends Application {
 	public boolean getIsWatchingCurrentPlaylist() {
 		return isWatchingCurrentPlaylist;
 	}
-
-
-	public void addOutput(Output x) {
-		outputs.add(x);
-	}
-	
-	private Handler handler = new Handler();
-		
-	private void updateOutputs() {
-		for (Output x: outputs) {
-			x.update();
-		}
-	}
-	
-	private final Runnable runnable = new Runnable() {
-		public void run() {
-			updateOutputs();
-			handler.postDelayed(this, 100);
-		}	
-	};
-	
-	private void startOutputUpdates() {
-		if (!outputs.isEmpty()) {
-			handler.postDelayed(runnable, 100);
-		} 
-	}
-
-	private void stopOutputUpdates() {
-		handler.removeCallbacks(runnable);			
-	}
-
-	public void setFreshCsoundState() {
-		stopOutputUpdates();
-		outputs = new ArrayList<Output>();	
-	}
-
 }

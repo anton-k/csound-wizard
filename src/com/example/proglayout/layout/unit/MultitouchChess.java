@@ -32,8 +32,9 @@ public class MultitouchChess implements Unit {
 				com.example.proglayout.view.unit.MultitouchChess res = new com.example.proglayout.view.unit.MultitouchChess(ctx.getContext(), 
 						maxTouch, param.getRange().getIntRangeX(), param.getRange().getIntRangeY(), param.getNames().getNameList(), 
 						param.getColor(), param.getText());
-				new Key2(id, maxTouch, res).addToCsound(ctx.getCsoundObj());
-				
+				if (ctx.needsConnection()) {
+					new Key2(id, maxTouch, res).addToCsound(ctx.getCsoundObj());	
+				}				
 				return res;
 			}
 		});		

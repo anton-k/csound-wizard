@@ -27,7 +27,9 @@ public class OutKnob implements Unit {
 			public View apply(String id) {
 				float initVal = UnitUtils.getState(id, trackState, Dial.defaultState());				
 				Dial res = new Dial(ctx.getContext(), id, initVal, param.getRange().getRange(), param.getColor());
-				new CachedOutputSlide(id, res).addToCsound(ctx.getApp());
+				if (ctx.needsConnection()) {
+					new CachedOutputSlide(id, res).addToCsound(ctx.getPlayer());
+				}				
 				res.setOutputOnlyMode();
 				return res;
 			}			

@@ -30,7 +30,9 @@ public class Slider implements Unit {
 						ctx.getContext(), id, initVal, 
 						param.getRange().getRange(), 
 						param.getColor(), isHor);
-				new CachedSlide(id, initVal, slider).addToCsound(ctx.getCsoundObj());
+				if (ctx.needsConnection()) {
+					new CachedSlide(id, initVal, slider).addToCsound(ctx.getCsoundObj());
+				}
 				return slider;
 			}			
 		});		

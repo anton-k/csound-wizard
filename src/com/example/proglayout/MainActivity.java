@@ -29,7 +29,7 @@ import com.example.proglayout.model.TrackRef;
 import com.example.proglayout.model.TrackState;
 
 public class MainActivity extends ExitActivity {
-	public static final String CSD_RUNNER = "csd runner";
+	public static final String	CSD_RUNNER = "csd runner";
 	
 	private App app; 
 	private Menu menu;

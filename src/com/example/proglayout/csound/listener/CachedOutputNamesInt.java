@@ -2,7 +2,7 @@ package com.example.proglayout.csound.listener;
 
 import android.widget.TextView;
 
-import com.example.proglayout.App;
+import com.example.proglayout.Player;
 import com.example.proglayout.csound.channel.IntegerOutput;
 import com.example.proglayout.csound.channel.Output;
 
@@ -24,7 +24,7 @@ public class CachedOutputNamesInt implements Output {
 		}				
 	}
 	
-	public void addToCsound(App app) {
+	public void addToCsound(Player app) {
 		app.getCsoundObj().addValueCacheable(mChn);
 		app.addOutput(this);
 	}

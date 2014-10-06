@@ -29,7 +29,9 @@ public class Tap implements Unit {
 				int ny = param.getRange().getIntRangeY();
 				TapBoard res = new TapBoard(ctx.getContext(), nx, ny, param.getNames().getNameList(),						
 						param.getColor(), param.getText());
-				new KeyPress2(id, nx, ny, new boolean[0], res).addToCsound(ctx.getCsoundObj());
+				if (ctx.needsConnection()) {
+					new KeyPress2(id, nx, ny, new boolean[0], res).addToCsound(ctx.getCsoundObj());
+				}
 				
 				return res;
 			}			

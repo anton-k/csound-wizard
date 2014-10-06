@@ -32,7 +32,9 @@ public class TapToggle implements Unit {
 				boolean initVal[] = UnitUtils.getState(strId, nx, ny, trackState, TapToggleBoard.defaultState(nx, ny));
 				TapToggleBoard res = new TapToggleBoard(ctx.getContext(), strId, initVal, nx, ny, 
 						param.getNames().getNameList(), param.getColor(), param.getText());
-				new KeyPress2(id, nx, ny, initVal, res).addToCsound(ctx.getCsoundObj());
+				if (ctx.needsConnection()) {
+					new KeyPress2(id, nx, ny, initVal, res).addToCsound(ctx.getCsoundObj());
+				}
 				
 				return res;
 			}			

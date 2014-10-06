@@ -31,7 +31,9 @@ public class ShowInts implements Unit {
 			public View apply(String id) {
 				TextView tv = new TextView(ctx.getContext());
 				Layout.setTextProperties(tv, param.getText());
-				new CachedOutputNamesInt(id, tv).addToCsound(ctx.getApp());				
+				if (ctx.needsConnection()) {
+					new CachedOutputNamesInt(id, tv).addToCsound(ctx.getPlayer());
+				}
 				return tv;				
 			}
 		});		

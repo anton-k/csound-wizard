@@ -34,7 +34,9 @@ public class OutPlane implements Unit {
 				Position res = new Position(ctx.getContext(), id, x, y, 
 					param.getRange().getRangeX(), param.getRange().getRangeY(),
 					param.getColor());
-				new CachedOutputSlide2(id, res).addToCsound(ctx.getApp());
+				if (ctx.needsConnection()) {
+					new CachedOutputSlide2(id, res).addToCsound(ctx.getPlayer());
+				}
 				res.setOutputOnlyMode();				
 				return res;
 			}			

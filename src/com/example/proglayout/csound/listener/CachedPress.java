@@ -30,4 +30,5 @@ public class CachedPress {
 	public void addToCsound(CsoundObj csd) {
 		csd.addValueCacheable(mChannel);		
 	}
+
 }

@@ -28,7 +28,9 @@ public class TapClick implements Unit {
 				TapClickBoard res = new TapClickBoard(ctx.getContext(), 
 						param.getRange().getIntRangeX(), param.getRange().getIntRangeY(), param.getNames().getNameList(),						
 						param.getColor(), param.getText());
-				new Tap2(id, res).addToCsound(ctx.getCsoundObj());				
+				if (ctx.needsConnection()) {
+					new Tap2(id, res).addToCsound(ctx.getCsoundObj());
+				}
 				return res;
 			}			
 		});		

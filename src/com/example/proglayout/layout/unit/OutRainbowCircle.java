@@ -26,7 +26,9 @@ public class OutRainbowCircle implements Unit {
 			@Override
 			public View apply(String id) {								
 				RainbowCircle res = new RainbowCircle(ctx.getContext(), param.getRange().getRange());
-				new CachedOutputSlide(id, res).addToCsound(ctx.getApp());				
+				if (ctx.needsConnection()) {
+					new CachedOutputSlide(id, res).addToCsound(ctx.getPlayer());
+				}
 				return res;
 			}			
 		});		
