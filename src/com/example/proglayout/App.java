@@ -30,8 +30,6 @@ public class App extends Application {
 	private boolean isWatchingCurrentPlaylist = false;	
 	private List<Output> outputs = new ArrayList<Output>();
 	
-	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-	
 	private Settings settings = new Settings();;
 	
 	public CsoundObj getCsoundObj() {

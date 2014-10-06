@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.csounds.CsoundObj;
 import com.example.proglayout.Utils;
 import com.example.proglayout.layout.SetLayoutParam.LayoutParent;
 import com.example.proglayout.layout.Units.Unit;
@@ -25,14 +26,14 @@ import com.example.proglayout.view.param.Param;
 import com.example.proglayout.view.param.TextParam;
 
 public class Layout {		
-	public static View init(Context ctx, InputStream file, TrackState trackState) {
+	public static View init(Context ctx, InputStream file, CsoundObj csd, TrackState trackState) {
 		String text = Utils.readFile(file);
-		return init(ctx, text, trackState);		
+		return init(ctx, text, csd, trackState);		
 	}
 
-	public static View init(Context ctx, String text, TrackState trackState) {		
+	public static View init(Context ctx, String text, CsoundObj csd, TrackState trackState) {		
 		Object obj = JSONValue.parse(text);		
-		LayoutContext context = new LayoutContext(ctx);
+		LayoutContext context = new LayoutContext(ctx, csd);
 		Param defaultParam = context.getApp().getModel().getSettings().getParam();
 		
 		if (obj == null) {

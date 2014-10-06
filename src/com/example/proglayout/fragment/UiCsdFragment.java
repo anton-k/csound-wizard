@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.csounds.CsoundObj;
 import com.example.proglayout.App;
+import com.example.proglayout.Player;
 import com.example.proglayout.R;
 import com.example.proglayout.layout.Layout;
 import com.example.proglayout.model.TrackState;
@@ -17,6 +18,7 @@ public class UiCsdFragment extends UiWatcherFragment {
 	
 	private String mUiText;
 	private TrackState trackState;
+	private Player player = new Player();
 
 	public UiCsdFragment(String track, String uiText, TrackState state) {
 		mUiText = uiText;
@@ -47,7 +49,7 @@ public class UiCsdFragment extends UiWatcherFragment {
 			tv.setText(R.string.no_ui_csd);
 			ui = tv;
 		} else {
-			ui = Layout.init(ctx, mUiText, trackState);					
+			ui = Layout.init(ctx, mUiText, csoundObj, trackState);					
 		}		
 		
 		parent.addView(ui, index);	
