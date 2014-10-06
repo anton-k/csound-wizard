@@ -29,9 +29,7 @@ public class OutSlider implements Unit {
 						ctx.getContext(), id, initVal,
 						param.getRange().getRange(),
 						param.getColor(), Slider.getIsHor(param, layoutParent));
-				if (ctx.needsConnection()) {
-					new CachedOutputSlide(id, slider).addToCsound(ctx.getPlayer());
-				}
+				new CachedOutputSlide(id, slider).addToCsound(ctx.getPlayer());				
 				slider.setOutputOnlyMode();
 				return slider;
 			}			

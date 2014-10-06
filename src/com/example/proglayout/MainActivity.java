@@ -1,16 +1,11 @@
 package com.example.proglayout;
 
-import java.io.File;
-import java.io.InputStream;
-
-import org.apache.commons.io.FileUtils;
-
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,26 +15,29 @@ import android.widget.Toast;
 import com.example.proglayout.fragment.BrowseFragment;
 import com.example.proglayout.fragment.ChooserFragment;
 import com.example.proglayout.fragment.CurrentPlaylistFragment;
-import com.example.proglayout.fragment.NoUiCsdFragment;
 import com.example.proglayout.fragment.RecentFragment;
 import com.example.proglayout.fragment.SettingsFragment;
 import com.example.proglayout.fragment.UiCsdFragment;
 import com.example.proglayout.model.Model;
 import com.example.proglayout.model.TrackRef;
-import com.example.proglayout.model.TrackState;
 
 public class MainActivity extends ExitActivity {
-	public static final String	CSD_RUNNER = "csd runner";
+	private static final String	
+		WHERE_AM_I = "whereAmI",
+		IS_PLAY = "isPlay";
+	
 	
 	private App app; 
 	private Menu menu;
 	private boolean isPlay = false;	
 	private int whereAmI = R.id.action_current_playlist;
+	private FragmentManager fm;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		fm = getFragmentManager();
 		app = (App) getApplication();		
 		app.loadModel(this);		
 		
@@ -55,21 +53,24 @@ public class MainActivity extends ExitActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {	
 		super.onSaveInstanceState(outState);
-		outState.putInt("whereAmI", whereAmI);
+		outState.putInt(WHERE_AM_I, whereAmI);
+		outState.putBoolean(IS_PLAY, isPlay);
 	}
 	
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {	
 		super.onRestoreInstanceState(savedInstanceState);
-		whereAmI = savedInstanceState.getInt("whereAmI");
+		whereAmI = savedInstanceState.getInt(WHERE_AM_I);
+		isPlay = savedInstanceState.getBoolean(IS_PLAY);
 	}
 	
 	@Override
 	public void onExit() {
-		app.stop();
+		app.stop();		
 		app.getModel().save(this);
 		app.saveCacheToDisk();
 	}
+
 		
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,9 +83,8 @@ public class MainActivity extends ExitActivity {
 	    return true;
 	}
 	
-	private void restoreLocation() {
-		startFragment(new SettingsFragment());			
-		/*
+	private void restoreLocation() {			
+
 		try {
 		    if (whereAmI == R.id.action_current_track) {
 		    	goToTrack(app.getModel().getCurrentTrackId());
@@ -94,7 +94,7 @@ public class MainActivity extends ExitActivity {
 		} catch (Exception e) {			
 			goToCurrentPlaylist();
 		}
-		*/
+		
 	}
 
 	@Override
@@ -175,23 +175,23 @@ public class MainActivity extends ExitActivity {
 	}
 
 	private void switchPlayFlag() {
-		isPlay = !isPlay;		
+		isPlay = !isPlay;
+		setPlayStopIcon();		
 	}
 	
-	private void switchPlayStop() {
+	private void setPlayStopIcon() {
 		int file;
 		if (isPlay) {
 			file = R.drawable.stop;									
 		} else {
 			file = R.drawable.play;						
 		}
-		menu.getItem(0).setIcon(file);		
+		menu.getItem(0).setIcon(file);	 
 	}
 	
 	private void onActionPlay() {
-		switchPlayFlag();
-		performPlayAction(true);
-		switchPlayStop();		
+		switchPlayFlag();		
+		performPlayAction(true);				
 	}
 	
 	
@@ -203,42 +203,13 @@ public class MainActivity extends ExitActivity {
 	}
 	
 	private void performPlayAction(boolean useCache) {	
+		setPlayStopIcon();
 		whereAmI = R.id.action_current_track;
-		if (app.getModel().trackExists(app.getModel().getCurrentTrackId())) {
-			removeHangingTabs();			
-			setTitle(app.getModel().getCurrentTrackName());
-			
-			InputStream is;
-			try {				
-				String trackPath = app.getModel().getCurrentTrack().getName();
-				is = FileUtils.openInputStream(new File(trackPath));
-				String uiText = Utils.getUi(is);			
-				
-				if (uiText.isEmpty()) {
-					startFragment(new NoUiCsdFragment());										
-				} else {					
-					TrackState state;
-					
-					if (useCache) {
-						state = app.loadCurrentState(trackPath); 
-					} else {
-						state = TrackState.readDefaultState(trackPath);
-					}							
-							
-					startFragment(new UiCsdFragment(trackPath, uiText, state));					
-				}
-				
-				if (isPlay) {					
-					app.play(new File(trackPath));
-				} else {
-					app.stop();								
-				}
-				is.close();
-			} catch (Exception e) {				
-				startFragment(new NoUiCsdFragment());				
-			}	
-						
-		}
+		String trackPath = app.getModel().getCurrentTrack().getName();
+		app.setupPlayerFor(trackPath);
+		
+		setTitle(app.getModel().getCurrentTrackName());
+		startFragment(UiCsdFragment.newInstance(trackPath, useCache, isPlay));
 	}
 	
 	private void startFragment(Fragment a) {
@@ -283,12 +254,12 @@ public class MainActivity extends ExitActivity {
 		}
 	}
 	
-	private void onActionLeft() {
+	private void onActionLeft() {		
 		app.getModel().prevTrack();
 		performPlayActionWithCache();
 	}
 	
-	private void onActionRight() {
+	private void onActionRight() {		
 		app.getModel().nextTrack();
 		performPlayActionWithCache();				
 	}

@@ -36,9 +36,7 @@ public class Plane implements Unit {
 				Position res = new Position(ctx.getContext(), id, x, y,
 						r.getRangeX(), r.getRangeY(),
 						param.getColor());
-				if (ctx.needsConnection()) {
-					new CachedSlide2(id, x, y, res).addToCsound(ctx.getCsoundObj());
-				}
+				new CachedSlide2(id, x, y, res).addToCsound(ctx.getCsoundObj());				
 				return res;
 			}			
 		});		

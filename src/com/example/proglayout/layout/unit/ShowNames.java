@@ -30,9 +30,7 @@ public class ShowNames implements Unit {
 			public View apply(String id) {
 				TextView tv = new TextView(ctx.getContext());
 				Layout.setTextProperties(tv, param.getText());
-				if (ctx.needsConnection()) {
-					new CachedOutputNames(id, tv, param.getNames().getNameList()).addToCsound(ctx.getPlayer());
-				}
+				new CachedOutputNames(id, tv, param.getNames().getNameList()).addToCsound(ctx.getPlayer());				
 				return tv;				
 			}
 		});		

@@ -30,9 +30,7 @@ public class ShowFloats implements Unit {
 			public View apply(String id) {
 				TextView tv = new TextView(ctx.getContext());
 				Layout.setTextProperties(tv, param.getText());
-				if (ctx.needsConnection()) {
-					new CachedOutputNamesFloat(id, tv).addToCsound(ctx.getPlayer());
-				}
+				new CachedOutputNamesFloat(id, tv).addToCsound(ctx.getPlayer());				
 				return tv;				
 			}
 		});		

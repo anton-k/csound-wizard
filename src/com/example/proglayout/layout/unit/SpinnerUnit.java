@@ -27,9 +27,7 @@ public class SpinnerUnit implements Unit {
 			public View apply(String id) {	
 				int initVal = UnitUtils.getState(id, trackState, CsdSpinner.defaultState());				
 				CsdSpinner res = new CsdSpinner(ctx.getContext(), id, initVal, param.getNames().getNameList(), param.getText());
-				if (ctx.needsConnection()) {
-					new CachedTap(id, initVal, res).addToCsound(ctx.getCsoundObj());
-				}
+				new CachedTap(id, initVal, res).addToCsound(ctx.getCsoundObj());				
 				return res;				
 			}
 		});

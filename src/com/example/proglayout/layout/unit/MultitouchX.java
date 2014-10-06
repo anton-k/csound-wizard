@@ -31,10 +31,7 @@ public class MultitouchX implements Unit {
 						param.getRange().getIntRangeX(), param.getRange().getRangeY(), 
 						param.getNames().getNameList(), 
 						param.getColor(), param.getText());
-				if (ctx.needsConnection()) {
-					new Key2(instrId, maxTouch, res).addToCsound(ctx.getCsoundObj());
-				}	
-						
+				new Key2(instrId, maxTouch, res).addToCsound(ctx.getCsoundObj());
 				return res;				
 			}
 		});		

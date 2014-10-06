@@ -31,9 +31,7 @@ public class MultitouchY implements Unit {
 						param.getRange().getRangeX(), param.getRange().getIntRangeY(), 
 						param.getNames().getNameList(), 
 						param.getColor(), param.getText());
-				if (ctx.needsConnection()) {
-					new Key2(instrId, maxTouch, res).addToCsound(ctx.getCsoundObj());
-				}						
+				new Key2(instrId, maxTouch, res).addToCsound(ctx.getCsoundObj());										
 				return res;				
 			}
 		});

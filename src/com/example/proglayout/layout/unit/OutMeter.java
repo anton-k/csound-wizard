@@ -26,9 +26,7 @@ public class OutMeter implements Unit {
 			@Override
 			public View apply(String id) {								
 				Meter res = new Meter(ctx.getContext(), param.getRange().getRange(), layoutParent);
-				if (ctx.needsConnection()) {
-					new CachedOutputSlide(id, res).addToCsound(ctx.getPlayer());
-				}
+				new CachedOutputSlide(id, res).addToCsound(ctx.getPlayer());				
 				return res;
 			}			
 		});		

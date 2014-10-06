@@ -37,10 +37,8 @@ public class PlaneX implements Unit {
 						param.getRange().getIntRangeX(), param.getRange().getRangeY(), param.getNames().getNameList(), 
 						param.getColor(), param.getText());
 				
-				if (ctx.needsConnection()) {
-					new CachedTap(Utils.addSuffix(id, "x"), x, res).addToCsound(ctx.getCsoundObj());
-					new CachedSlide(Utils.addSuffix(id, "y"), y, res).addToCsound(ctx.getCsoundObj());
-				}				
+				new CachedTap(Utils.addSuffix(id, "x"), x, res).addToCsound(ctx.getCsoundObj());
+				new CachedSlide(Utils.addSuffix(id, "y"), y, res).addToCsound(ctx.getCsoundObj());								
 				return res;
 			}			
 		});		

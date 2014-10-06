@@ -36,10 +36,8 @@ public class PlaneY implements Unit {
 						param.getRange().getRangeX(), param.getRange().getIntRangeY(), param.getNames().getNameList(), 
 						param.getColor(), param.getText());
 				
-				if (ctx.needsConnection()) {
-					new CachedSlide(Utils.addSuffix(id, "x"), x, res).addToCsound(ctx.getCsoundObj());
-					new CachedTap(Utils.addSuffix(id, "y"), y, res).addToCsound(ctx.getCsoundObj());
-				}				
+				new CachedSlide(Utils.addSuffix(id, "x"), x, res).addToCsound(ctx.getCsoundObj());
+				new CachedTap(Utils.addSuffix(id, "y"), y, res).addToCsound(ctx.getCsoundObj());								
 				return res;
 			}			
 		});		

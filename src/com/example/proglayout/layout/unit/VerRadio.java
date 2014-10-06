@@ -31,9 +31,7 @@ public class VerRadio implements Unit {
 				int initVal = UnitUtils.getState(id, trackState, Radio.defaultState());
 				boolean isHor = false;
 				Radio res = new Radio(ctx.getContext(), id, initVal, names, isHor, param.getText());
-				if (ctx.needsConnection()) {
-					new CachedTap(id, initVal, res).addToCsound(ctx.getCsoundObj());
-				}
+				new CachedTap(id, initVal, res).addToCsound(ctx.getCsoundObj());				
 				return res;
 			}				
 		});		

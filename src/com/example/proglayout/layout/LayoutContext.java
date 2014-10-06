@@ -7,8 +7,7 @@ import com.csounds.CsoundObj;
 import com.example.proglayout.App;
 import com.example.proglayout.Player;
 
-public class LayoutContext {
-	private boolean skipConnectionToCsound;
+public class LayoutContext {	
 	private Context context;
 	private Player player;
 	
@@ -20,8 +19,7 @@ public class LayoutContext {
 		return context;
 	}
 	
-	public LayoutContext(Context c, Player csd, boolean skipConnectionToCsoundFlag) {		
-		skipConnectionToCsound = skipConnectionToCsoundFlag;
+	public LayoutContext(Context c, Player csd) {		
 		context = c;				
 		player = csd;
 	}
@@ -32,9 +30,5 @@ public class LayoutContext {
 	
 	public Player getPlayer() {		
 		return player;
-	}
-
-	public boolean needsConnection() {		
-		return !skipConnectionToCsound;
-	}
+	}	
 }

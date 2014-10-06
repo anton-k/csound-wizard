@@ -28,9 +28,7 @@ public class Toggle implements Unit {
 			public View apply(String id) {				
 				boolean initVal = getState(id, trackState);			
 				ToggleButton res = new ToggleButton(ctx.getContext(), id, initVal, param.getColor());	
-				if (ctx.needsConnection()) {
-					new CachedPress(id, res).addToCsound(ctx.getCsoundObj());
-				}
+				new CachedPress(id, res).addToCsound(ctx.getCsoundObj());				
 				return res;
 			}			
 		});		

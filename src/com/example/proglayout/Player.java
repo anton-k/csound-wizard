@@ -1,30 +1,36 @@
 package com.example.proglayout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import android.os.Handler;
 
 import com.csounds.CsoundObj;
-import com.example.proglayout.csound.channel.GetCsoundValue;
 import com.example.proglayout.csound.channel.Output;
 
 public class Player {
 	
+	private boolean isRunning = false;	
 	private CsoundObj csoundObj = new CsoundObj();
 	private List<Output> outputs = new ArrayList<Output>();
 	
 	public Player() {}
 		
-	public void play(Context ctx, String csdFile) {
-		csoundObj.startCsound(Utils.createTempFile(ctx, csdFile));
-		startOutputUpdates();
+	public void play(String csdFile) {
+		if (!isRunning) {
+			isRunning = true;
+			csoundObj.startCsound(new File(csdFile));
+			startOutputUpdates();
+		}
 	}
 	
 	public void stop() {
-		stopOutputUpdates();		
-		csoundObj.stopCsound();		
+		if (isRunning) {
+			isRunning = false;
+			stopOutputUpdates();		
+			csoundObj.stopCsound();
+		}
 	}
 	
 	// -----------------------------------------------------------
@@ -59,6 +65,10 @@ public class Player {
 
 	public void addOutput(Output x) {
 		outputs.add(x);				
+	}
+
+	public boolean isRunning() {
+		return isRunning;
 	}
 	
 }

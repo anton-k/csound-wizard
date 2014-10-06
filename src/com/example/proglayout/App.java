@@ -15,7 +15,9 @@ import com.example.proglayout.model.Model;
 import com.example.proglayout.model.TrackState;
 
 public class App extends Application {	
-		
+	
+	private Player player = new Player();
+	private String playerTrack = "";
 	private Model model = null;	
 	private CacheState cache = new CacheState();
 	private boolean isWatchingCurrentPlaylist = false;	
@@ -105,5 +107,30 @@ public class App extends Application {
 
 	public boolean getIsWatchingCurrentPlaylist() {
 		return isWatchingCurrentPlaylist;
+	}
+
+		
+	public void setupNewPlayer() {
+		player.stop();
+		player = new Player();
+	}
+		
+	public void play(String trackPath) {
+		player.play(trackPath);							
+	}
+	
+	public void stop() {
+		player.stop();						
+	}
+
+	public Player getPlayer() {		
+		return player;		
+	}
+
+	public void setupPlayerFor(String trackPath) {
+		if (!playerTrack.equals(trackPath)) {
+			setupNewPlayer();
+			playerTrack = trackPath;
+		}		
 	}
 }

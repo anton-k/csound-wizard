@@ -25,9 +25,7 @@ public class Button implements Unit {
 			@Override
 			public View apply(String id) {
 				CircleButton res = new CircleButton(ctx.getContext(), param.getColor());
-				if (ctx.needsConnection()) {
-					new CachedPress(id, res).addToCsound(ctx.getCsoundObj());
-				}				
+				new CachedPress(id, res).addToCsound(ctx.getCsoundObj());								
 				return res;
 			}			
 		});		

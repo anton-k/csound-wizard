@@ -28,9 +28,7 @@ public class Multitouch implements Unit {
 				Integer maxTouch = param.getTouch().getTocuhLimit();
 				MultitouchPosition res = new MultitouchPosition(ctx.getContext(), maxTouch, 
 						param.getRange().getRangeX(), param.getRange().getRangeY(), param.getColor());
-				if (ctx.needsConnection()) {
-					new Key2(instrId, maxTouch, res).addToCsound(ctx.getCsoundObj());
-				}				
+				new Key2(instrId, maxTouch, res).addToCsound(ctx.getCsoundObj());								
 				return res;
 			}			
 		});		

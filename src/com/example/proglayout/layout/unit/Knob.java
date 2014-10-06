@@ -27,9 +27,7 @@ public class Knob implements Unit {
 			public View apply(String id) {
 				float initVal = UnitUtils.getState(id, trackState, Dial.defaultState());				
 				Dial res = new Dial(ctx.getContext(), id, initVal, param.getRange().getRange(), param.getColor());
-				if (ctx.needsConnection()) {
-					new CachedSlide(id, initVal, res).addToCsound(ctx.getCsoundObj());
-				}				
+				new CachedSlide(id, initVal, res).addToCsound(ctx.getCsoundObj());								
 				return res;
 			}			
 		});		

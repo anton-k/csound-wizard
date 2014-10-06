@@ -26,9 +26,7 @@ public class OutMeterDialCenter implements Unit {
 			@Override
 			public View apply(String id) {								
 				MeterDial res = new MeterDial(ctx.getContext(), param.getRange().getRange(), true);
-				if (ctx.needsConnection()) {
-					new CachedOutputSlide(id, res).addToCsound(ctx.getPlayer());
-				}
+				new CachedOutputSlide(id, res).addToCsound(ctx.getPlayer());				
 				return res;
 			}			
 		});		

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import org.apache.commons.io.FileUtils;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,29 +20,28 @@ import com.example.proglayout.Utils;
 import com.example.proglayout.layout.Layout;
 import com.example.proglayout.model.TrackState;
 
-public class UiCsdFragment extends UiWatcherFragment {
-	
-	private String mUiText;
-	private String csdFile = "";
+public class UiCsdFragment extends UiWatcherFragment {	
+	private String mUiText;	
 	private TrackState trackState;
-	private Player player = new Player();
-	
+				
 	private boolean 
-		useCache,
-		uiIsEmpty;
+		useCache = true,
+		uiIsEmpty,
+		isPlay;
 
 	private String trackPath;
 
-	public static UiCsdFragment newInstance(String trackPath, boolean useCache) {
+	public static UiCsdFragment newInstance(String trackPath, boolean useCache, boolean isPlay) {
 		UiCsdFragment res = new UiCsdFragment();
 		res.trackPath = trackPath; 
 		res.useCache = useCache;
+		res.isPlay = isPlay;
 		
 		String uiText;
 		try {
-			InputStream is = FileUtils.openInputStream(new File(trackPath));
-			res.csdFile = FileUtils.readFileToString(new File(trackPath));
-			uiText = Utils.getUi(is);		
+			InputStream is = FileUtils.openInputStream(new File(trackPath));			
+			uiText = Utils.getUi(is);
+			is.close();
 		} catch (Exception e) {
 			uiText = ""; 
 		}
@@ -50,35 +50,57 @@ public class UiCsdFragment extends UiWatcherFragment {
 		} else {
 			res.uiIsEmpty = false;
 			res.mUiText = uiText;			
-		}
-		
+		}		
 		return res;		
 	}
 	
-	
+	public String getTrackPath() {
+		return trackPath;
+	}
+		
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {	
 		
+		View res;
+		App app = (App) getActivity().getApplication();
+				
+		if (savedInstanceState != null) {
+			uiIsEmpty = savedInstanceState.getBoolean("uiIsEmpty");
+			trackPath = savedInstanceState.getString("trackPath");
+			mUiText = savedInstanceState.getString("uiText");			
+		}		
+		
 		if (uiIsEmpty) {			
-			return noUiView(inflater, container);			
+			res = noUiView(inflater, container);			
 		} else {
-			return setupUi(inflater, container, savedInstanceState);			
+			res = setupUi(inflater, container, savedInstanceState);			
 		}
 		
+		if (savedInstanceState == null) {
+			if (isPlay) {
+				app.play(trackPath);
+			} else {
+				app.stop();
+			}			
+		}
+		
+		return res;			
 	}
 
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {	
 		super.onSaveInstanceState(outState);
+		outState.putBoolean("uiIsEmpty", uiIsEmpty);
+		outState.putString("trackPath", trackPath);
+		outState.putString("uiText", mUiText);		
 	}
 	
 	private View setupUi(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		Activity ctx = getActivity();
-		App app = (App) ctx.getApplication();
-		boolean skipCsoundInit = (savedInstanceState != null);	
+		App app = (App) ctx.getApplication();		
 		
 		if (useCache) {
 			trackState = app.loadCurrentState(trackPath); 
@@ -93,13 +115,14 @@ public class UiCsdFragment extends UiWatcherFragment {
 		parent.removeView(body);
 			
 		View ui;
+		Player player = app.getPlayer();
 		if (mUiText.isEmpty()) {
 			TextView tv = new TextView(getActivity());
 			tv.setText(R.string.no_ui_csd);
 			Layout.setTextProperties(tv, app.getModel().getSettings().getParam().getText());
 			ui = tv;
 		} else {
-			ui = Layout.init(ctx, mUiText, player, trackState, skipCsoundInit);					
+			ui = Layout.init(ctx, mUiText, player, trackState);			
 		}		
 		
 		parent.addView(ui, index);	
@@ -114,12 +137,9 @@ public class UiCsdFragment extends UiWatcherFragment {
 		res.setBackgroundColor(app.getModel().getSettings().getParam().getColor().getBkgColor());
 		return res;
 	}
+
 	
-	public void play() {
-		player.play(getActivity(), csdFile);				
-	}
-	
-	public void stop() {
-		player.stop();		
-	}
+	public static void set(FragmentManager fm, UiCsdFragment x) {
+		fm.beginTransaction().replace(R.id.container, x).commit();	
+	}	
 }
