@@ -8,14 +8,19 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />    
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"></uses-permission>
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+   
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/WizardAppTheme"
-        android:name=".App">
+        android:name="com.csound.wizard.App">
         <activity
-            android:name="com.example.proglayout.MainActivity"
+            android:name="com.csound.wizard.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,6 +46,4 @@
 		</activity>        
     </application>
     
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 </manifest>

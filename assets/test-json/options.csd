@@ -9,6 +9,16 @@
 		, { "sliders": { "slider" : "sld1", "init": 0.75 }}
 		, { "knobs"  : { "knob" : "k1", "init": 0.75 }}
 		, { "tap"    : { "tap" : 1, "range-x": 1, "range-y": 2}}
+		, { "uis"    : 	{ "ver": [
+				{ "toggles": "tgl1", "names": ["one", "two", "three", "zero"] }
+				{ "hor": [ { "toggle": "btn1",
+			 	  			 "margin": 10, "height": "150" },
+			 			   { "slider": "slider1", "orient": "hor" }]
+			 	, "set-default": { "fst-color": "olive" }
+			 	},
+			 	{ "ver-radio": "spin1", "names": ["one", "two", "three", "fuzz"], "init": 2 }
+			 	{ "spinner": "spin2", "names": ["one", "two", "three", "fuzz"], "init": 2 }
+			]}}
 		]	
 }
 </wizard>

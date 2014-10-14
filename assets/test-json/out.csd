@@ -2,15 +2,17 @@
 
 <wizard>
 { "hor": [
-	  { "center-meter": "amp" }
-	, { "ver": [
+	  { "meter": "voice" }
+	, { "line": null, "fst-color": "black" }
+	, { "ver-scroll": [
 		  { "meter": "amp" }
 		, { "center-circle-meter": "amp" }
 		, { "out-plane": "amp" }	
-		, { "show-names": "labels", "names": ["left", "center", "right"] }			
+		, { "show-names": "labels", "names": ["left", "center", "right"] }	
+		, { "line": null, "fst-color": "orange" }		
 		, { "slider": "ampCoeff", "init": 1 }
 		, { "slider": "speed", "init": 0.1, "range": [0.1, 1.5] }
-		]}	
+		]}		
 ], 
 "set-default": {
     "margin": 10    
@@ -20,18 +22,22 @@
 
 <CsOptions>
 
--o dac -d 
+-o dac -+rtmidi=null -d -+msg_color=0 -M0 -m0 -i adc 
 </CsOptions>
 
 <CsInstruments>
 
 sr = 44100
 ksmps = 64
-nchnls = 1
+nchnls = 2
 0dbfs = 1.0
 
 
 instr 18
+aVoice, aV ins
+kRmsVoice rms (0.5 * (aVoice + aV))
+chnset (3 * kRmsVoice), "voice"
+
 kampCoeff chnget "ampCoeff"
 kspeed chnget "speed"
 kcps = kspeed
@@ -46,7 +52,7 @@ chnset krLabels, "labels"
 chnset kr1, "amp"
 chnset kr1, "amp.x"
 chnset kr1y, "amp.y"
-out (0 * ar0)
+outs (0 * ar0), (0 * ar0)
 endin
 
 </CsInstruments>

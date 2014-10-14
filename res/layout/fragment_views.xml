@@ -9,18 +9,18 @@
     	android:layout_height="wrap_content"
     	android:orientation="horizontal" >
     
-	    <com.example.proglayout.view.unit.CircleButton 
+	    <com.csound.wizard.view.unit.CircleButton 
 	        android:id="@+id/btn1"
 	      	android:layout_width="wrap_content"
 	      	android:layout_height="wrap_content"
 	      	android:color="#FF0000" />   
 	
-	    <com.example.proglayout.view.unit.Dial 
+	    <com.csound.wizard.view.unit.Dial 
 	        android:id="@+id/btn2"
 	      	android:layout_width="wrap_content"
 	      	android:layout_height="wrap_content" />   
 	    
-	    <com.example.proglayout.view.unit.ToggleButton 
+	    <com.csound.wizard.view.unit.ToggleButton 
 	        android:id="@+id/btn3"
 	      	android:layout_width="wrap_content"
 	      	android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
 	      	
 	</LinearLayout>
       	
-    <com.example.proglayout.view.unit.TapClickBoard 
+    <com.csound.wizard.view.unit.TapClickBoard 
         android:id="@+id/pos1"
       	android:layout_width="match_parent"
       	android:layout_height="wrap_content" />
