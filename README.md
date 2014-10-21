@@ -32,7 +32,7 @@ We can define sliders, buttons, toggle-buttons, radio-buttons,
 2D-sliders, knobs, tap-pads. We can group these elements 
 in different kinds of layouts.
 
-![](wiz.jpg)
+![](pic/wiz.jpg)
 
 JSON refresher
 --------------------------------
