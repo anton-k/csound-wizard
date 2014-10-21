@@ -3,15 +3,15 @@ The Csound wizard
 =============================
 
 
-With Csound Wizard (CW) we can run csound files on android.
-The CW is a player for csound files. The UI is specified with JSON
-and sound engine is defined in the csound file.
-
-CW can organize csd-files in groups (playlists) save the state
+The Csound Wizard is an android player for csound files. 
+The UI is specified with JSON and sound engine is defined in the csound file.
+We can organize csd-files in groups (playlists) save the state
 of the UI. 
 
 To include the UI-defninition in CSD-file we have to define
-an xml element with tag "wizard":
+an xml element with the tag "wizard":
+
+![](pic/wiz.jpg)
 
 ~~~
 <CsoundSynthesizer>
@@ -32,7 +32,6 @@ We can define sliders, buttons, toggle-buttons, radio-buttons,
 2D-sliders, knobs, tap-pads. We can group these elements 
 in different kinds of layouts.
 
-![](pic/wiz.jpg)
 
 JSON refresher
 --------------------------------
@@ -41,6 +40,8 @@ The JSON is very simple format for data specification.
 If you don't know anything about it don't worry. It's super easy. 
 
 The JSON is
+
+* a value null: `null`
 
 * number: `1`, `2.5`, `38`
 
@@ -59,22 +60,69 @@ and objects (`{ "key1": value1, "key2": value2, etc}`).
 That's it. You know the JSON. 
 
 
+An example
+------------------------------
 
+A little teaser of what can be done.
+
+~~~
+<CsoundSynthesizer>
+
+<wizard>
+[ { "slider": "amp" }
+, { "slider": "cps" } ]
+</wizard>
+
+<CsOptions>
+-o dac -d
+</CsOptions>
+
+<CsInstruments>
+
+sr = 44100
+ksmps = 64
+nchnls = 1
+0dbfs = 1
+
+instr 1
+kamp chnget "amp"
+kcps chnget "cps"
+
+ares oscil3 kamp, 220 * pow(2, kcps), 1
+out ares
+endin
+
+</CsInstruments>
+
+<CsScore>
+f0 604800.0
+f1 0 8192 10  1.0
+
+i1 0.0 -1.0 
+
+</CsScore>
+</CsoundSynthesizer>
+~~~
+
+We can see how it's easy to define the UI.
 
 UI primitives
 -------------------------------
 
-To define an element we write an JSON-object
+To define an element we write a JSON-object
 with the type of the element as one of the values:
 
 ~~~
-{ "type_of_the_object": object_specs }
+{ "type_of_the_object": "channel_name"
+, "propertyA": "valueA"
+, "propertyB": "valueB" }
 ~~~
 
-To bind the element to csound signal it contains 
-a value `"id"` with the name of the channel. 
-We use this channel to send values to csound.
-We can read the values in csound with opcode `chnread`.
+The `"channel_name"` binds a widget with csound channel.
+We can read or write values in the csound with opcodes `chnget/chnset`.
+The other fields of the JSON-object can describe the properties of 
+the widget. It can be text size, primary or background colors, 
+ranges for values etc.
 
 ### Static text
 
@@ -83,6 +131,14 @@ The simplest element is a static text. It just shows a string:
 ~~~
 "Hello, I'm just a text"
 ~~~
+
+A little bit more verbose:
+
+~~~
+{ "text": "I'm a text too" }
+~~~
+
+The latter form can be useful for setting the text properties.
 
 ### Button
 
@@ -93,7 +149,7 @@ The button sends the 1's to csound when it's pressed and 0's otherwise.
 ~~~
 
 We read the signal in csound by channel with given name.
-It's "btnId" in the example above.
+It's `"btnId"` in the example above.
 
 ### Toggle button
 
@@ -101,46 +157,63 @@ The toggle button sends 0's after every even click
 and 1's after every odd click.
 
 ~~~
-{ "toggle": "btnId" }
+{ "toggle": "channelName" }
 ~~~
 
-### Radio buttons
+### Toggle names, spinners and radio buttons
 
-Radio buttons is a list of names each name set's
-the value of the signal to the integer index in the list:
+The toggle button provides just two states. It can be zero or one.
+The `toggles` is a more generic solution. With it we can toggle 
+between many states:
 
 ~~~
-{ "radio": [ "radioId", ["zero", "one", "two", "three"]] }
+{ "toggles": "channelName"
+, "names": ["zero", "one", "two", "three"] }
 ~~~
 
-For example when user choses "one" the csound signal is set to 1.
-To specify the radio-button group we need to provide the 
-channel name and the list of options.
+It toggles between as many integer values as the field `"names"` contain.
+
+There are three more widgets with the same functionality but with 
+different appereance.
+
+~~~
+{ "spinner": "channelName", 	"names": [...] }
+{ "hor-radio": "channelName", 	"names": [...] }
+{ "ver-radio": "channelName", 	"names": [...] }
+~~~
+The `spinner` is good old drop down list. The `hor` and `ver` radios are 
+groups of radio buttons with single choice.
+
 
 ### Sliders and knobs
 
-Slider sends values in the given interval.
+A slider sends values in the given interval.
 The actual value depends on the user finger motion:
+
+The most simple form is just:
 
 ~~~
 { "slider": "slider1" }
-
-{ "slider": ["slider1", 1] }
-
-{ "slider": ["slider1", 0, 127]}
 ~~~
 
-There are two variants for specifiying a range. 
-It can be a single number or the pair of numbers.
-If ot's a single number the value specifies the maximum value
-for the slider the minimum is set to 0. If no values are given 
-for a range the [0, 1] is assumed.
+It defines the slider which ranges over interval `[0, 1]`
+with `0.5` as initial value.
+
+With optional fields we can specify range and initial value:
+
+~~~
+{ "slider": "slider1"
+, "range": [-10, 10]
+, "init": 0 }
+~~~
+
+By default all ranges are in the interval `[0, 1]`.
 
 The knob is a circular slider. It's specified just as slider
 but we should write `knob` as the element's type:
 
 ~~~
-{ "knob": "knob1" }
+{ "knob": "channelName" }
 ~~~
 
 ### 2D-slider
@@ -150,21 +223,19 @@ The 2D slider is a rectangular plane. It defines a pair of signals.
 ~~~
 { "plane": "plane1"}
 
-{ "plane": ["plane1", 1, 127] }
+~~~
 
-{ "plane": ["plane1", 0, 127, 0, 1]}
+We can specify ranges and initial values:
+
+~~~
+{ "plane": "plane1"
+, "range-x": [0, 10]
+, "range-y": [0, 10]
+, "init": [5, 5] }
 ~~~
 
 In the example we can read the signals in csound code 
-by two ids: "plane1-x" and "plane1-y".
-
-We can specify range as 
-
-* a single number: V -- X's and Y's ranges in the interval [0, V]
-
-* a pair of numbers: [a, b] -- X ranges in the [0, a] and Y ranges in the [0, b]
-
-* quartetof numbers: [ax, bx, ay, by] -- X ranges in [ax, bx] and Y ranges in [ay, by]
+by two ids: "plane1.x" and "plane1.y".
 
 #### Half integer planes
 
@@ -175,40 +246,71 @@ It's the same as simple `plain` but we should specify `plane-x` or `plane-y`
 in the elemet's type. There is a integer 2D slider. It's called `chess`.
 
 ~~~
-{ "plane-x": ["plane1", 10, 1]}
-{ "plane-x": ["plane1", 10, [0, 10]]}
+{ "plane-x": "channelName"
+, "range-x": 6
+, "init": [0, 0.7] }
 
-{ "plane-y": ["plane1", 6, 1]}
-{ "plane-y": ["plane1", 6, [0, 10]]}
+{ "plane-y": "channelName"
+, "range-y": 3
+, "init": [1, 0.7] }
 ~~~
 
 The number of descrete values equals to the integer value  that goes right after the 
 plane's identifier. In the given example we have X-integer 
-plane with eleven defferent values [0 to 9].
+plane with eleven defferent values [0 to 5].
+
+There is a plane that produces integer values in the both directions:
+
+~~~
+{ "chess": "channelName"
+, "range-x": 8
+, "range-y": 8 }
+~~~
+
+With optional field `names` we can label the cells of the plane:
+
+~~~
+{ "plane-x": "channelName"
+, "range-x": 4
+, "names": ["Am", "C", "F", "G"] }
+~~~
 
 ### Tap pad
 
-With tap pad we can emulate a drum pad. 
+With tap pad we can emulate a drum pad or keyboard. 
 There is a table of buttons. Each can trigger an instrument.
 
 ~~~
-{ "tap": ["tap1", 3, 4, ["a", "b", "c", ...]]}
+{ "tap": 23, 
+, "range-x": 3
+, "range-y": 4
+, "names": ["a", "b", "c", ...]}
+~~~
+
+It triggers the instrument with the given integer id (here it's 23). 
+The note contains two arguments which describe the pressed button: 
+
+~~~
+ix = p4
+iy = p5
 ~~~
 
 We can specify the names of the buttons with optional value list of names.
-
+There two variations on the `tap` theme. The `tap-toggle` have buttons wich
+toggle between two states. The `tap-click` has instant click buttons instead
+of pressable keys. 
 
 ### Multitouch
 
 We can specify multitouch with one of the ways:
 
 ~~~
-{ "multitouch-plane": 3 }
-{ "multitouch-plane": [3, 4] }
+{ "mtouch": 3
+, "touch-limit" }
 ~~~
 
-The first argument describes the integer id of the triggered instrument. 
-The second optional argument specifies the muximum number of simultaneous touches. 
+The argument describes the integer id of the triggered instrument. 
+The second optional argument specifies the maximum number of simultaneous touches. 
 It equals to 10 if the parameter is omitted.
 
 The instrument is triggered with the only one p-field:
@@ -221,7 +323,7 @@ endin
 ~~~
 
 The multitouch passes two parameters to the instrument. They are normalized x and y
-coordinates. To extract the values (X and Y coordinates) please do use UDO:
+coordinates. Please do use UDO to read the values:
 
 ~~~
 opcode Touch, kk, 0
@@ -246,7 +348,7 @@ A short example for multitouch:
 <CsoundSynthesizer>
 
 <wizard>
-{ "multitouch-plane": 11 }
+{ "mtouch": 11 }
 </wizard>
 
 <CsOptions>
@@ -271,8 +373,6 @@ endop
 gaout init 0
 
 instr 11
-i_FingerIndex = p4
-
 kx, ky Touch
 
 kamp = (1 - ky) * 0.25
@@ -305,9 +405,58 @@ i 100 0 100000
 We trigger the instrument 11. The instrument 100 collects the reluslts 
 and sends them to speakers.
 
-There are similiar elements: `"multitouch-plane-x"`, `"multitouch-plane-y"`, `"multitouch-chess"`.
-They are just like `plane-x"`, `"plane-y"` and `"chess"` but the second parameter is an integer 
-limit for multitouch events.
+There are similiar elements: `"mtouch-x"`, `"mtouch-y"`, `"mtouch-chess"`.
+They are just like `plane-x"`, `"plane-y"` and `"chess"` but with support for multitouch.
+
+### Integer input
+
+We can set the integers:
+
+~~~
+{ "int": "channelName"
+, "range": [0, 100] }
+~~~
+
+### Show names, integers or floats
+
+We can show the csound value with widgets:
+
+~~~
+{ "show-names": "channelName"
+, "names": ["left", "right", "bottom"] }
+
+{ "show-ints": "channelName" }
+{ "show-floats": "channelName" }
+~~~ 
+
+The `show-names` reads integer values and mapps them to the
+elements of the given array.
+
+
+### Reading values with sliders, knobs and planes
+
+There are variants of the slide, knob and plane that read the value from the channel:
+
+~~~
+{ "out-slider": "chnnelName" }
+{ "out-knob": "chnnelName" }
+{ "out-plane": "chnnelName" }
+~~~
+
+### Indicators
+
+We can look at the csound values with indicators:
+
+~~~
+{ "meter": "channelName" }
+{ "circle-meter": "channelName" }
+{ "rainbow-circle": "channelName" }
+{ "center-meter": "channelName" }
+{ "center-circle-meter": "channelName" }
+~~~
+
+They all read the value in the range `[0, 1]`. The only thing that is
+different is the look of the widget.
 
 ### Empty space
 
@@ -319,6 +468,22 @@ Empty space can be used for layout.
 
 The value defines the size of an empty space.
 
+
+### Line
+
+The line draws a static line. It's usefule to draw the borders between
+the groups of widgets.
+
+~~~
+{ "line": null }
+~~~
+
+We can set the color:
+
+~~~
+{ "line": null
+, "fst-color": "black" }
+~~~
 
 UI-groups
 ----------------------------
@@ -530,16 +695,6 @@ We can alter the defults for all childrens of a given parent:
 That's how we can alter text size and color for all elements
 in the hierarchy.
 
-Examples
--------------------------
-
-### Metronome
-
-### Tuner
-
-### Simple instrument
-
-
 Csound player
 -----------------------
 
@@ -560,6 +715,37 @@ There are functions:
 
 * Settings -- sets specific settings.
 
---------------------------------
+--------------------------------------------------------
 
-Picture of the magician was found [here](http://www.people-clipart.com/people_clipart_images/people_cartoon_wizard_in_sorcerers_robe_and_a_magic_wand_0521-1010-2714-0148.html).
+The cool picture of the magician was found [here](http://www.people-clipart.com/people_clipart_images/people_cartoon_wizard_in_sorcerers_robe_and_a_magic_wand_0521-1010-2714-0148.html).
+
+
+## Developers guide to code 
+
+### Code roadmap
+
+* `wizard` -- top level things: main activity, application object, constants: 
+
+* `csound.channel` -- wrappers for csound value updaters
+
+* `csound.listener` -- abstraction on top of `csound.channel`. The combinations of channels.
+
+* `fragment` -- android fragments to show the user interface of the app.
+
+* `layout` -- top level package to read the layout from the JSON.
+
+* `layout.unit` -- reads the widget from JSON and binds it to csound.
+
+* `layout.param` -- specs for widget's parameters (parsing the parameters).
+
+* `model` -- app's state (manages playlists and settings).
+
+* `view` -- helper utils to draw the widgets and listen for the events.
+
+* `view.unit` -- views for widgets.
+
+### Hints
+
+To save the state of the widget we should extend from `StatefulUnit`. 
+Then we define how to parse the state in the class `TrackState`. 
+The method `getStateFromJson` does the thing.
