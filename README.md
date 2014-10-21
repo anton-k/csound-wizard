@@ -749,3 +749,6 @@ The cool picture of the magician was found [here](http://www.people-clipart.com/
 To save the state of the widget we should extend from `StatefulUnit`. 
 Then we define how to parse the state in the class `TrackState`. 
 The method `getStateFromJson` does the thing.
+
+
+Examples of the working files can be found in the directory `examples`.
